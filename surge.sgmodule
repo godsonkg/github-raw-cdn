@@ -1,13 +1,13 @@
-#!name= GitHub Raw Auto CDN
-#!desc= 将 GitHub Raw 请求自动重定向到 jsdelivr CDN，缓解 raw.githubusercontent.com 429/503
-#!author= godsonkg (fork自 Yuheng0101/X)
-#!category= Network
-#!homepage= https://github.com/godsonkg/github-raw-cdn
-#!version= 1.0.0
-#!date= 2026-07-09
+#!name=GitHub Raw Auto CDN
+#!desc=把 raw.githubusercontent.com 的请求 302 到 jsDelivr，减少 429/503。私有仓库和带认证头的请求不转。
+#!author=godsonkg（fork 自 Yuheng0101/X）
+#!category=Network
+#!homepage=https://github.com/godsonkg/github-raw-cdn
+#!version=1.1.0
+#!date=2026-09-25
 
 [Script]
-GitHub源文件自动CDN = type=http-request, pattern=^https?://raw\.githubusercontent\.com/.+, script-path=https://raw.githubusercontent.com/godsonkg/github-raw-cdn/main/index.js, timeout=5
+GitHub源文件自动CDN = type=http-request,pattern=^https?://raw\.githubusercontent\.com/.+,script-path=https://raw.githubusercontent.com/godsonkg/github-raw-cdn/main/index.js,timeout=5
 
 [MITM]
 hostname = %APPEND% raw.githubusercontent.com
