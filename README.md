@@ -1,10 +1,10 @@
 # github-raw-cdn
 
-Surge 模块：把 `raw.githubusercontent.com` 的请求 302 跳到 `cdn.jsdelivr.net`，GitHub Raw 频繁访问时少碰到 429/503。
+Surge 模块：把 `raw.githubusercontent.com` 的公开仓库 GET 请求 302 跳到 `cdn.jsdelivr.net`，改由 jsDelivr 提供文件。
 
 改自 [Yuheng0101/X](https://github.com/Yuheng0101/X/tree/main/Scripts/GitRawAutoCDN)，在原逻辑上加了三处：
 
-- 私有仓库（URL 带 `token=`）和带 `Authorization` 头的请求不转，否则 token 会发给 jsDelivr，而且只会拿到 404
+- URL 带 `token=` 或带 `Authorization` 头的请求保持原请求；jsDelivr 无法读取私有仓库
 - 新版 Raw 链接里的 `refs/heads/分支名`、`refs/tags/标签名` 会换成 jsDelivr 的 `@分支名` 写法
 - 只转 GET 请求，查询参数不带过去
 
@@ -14,9 +14,9 @@ Surge 模块：把 `raw.githubusercontent.com` 的请求 302 跳到 `cdn.jsdeliv
 
 ## 注意
 
-jsDelivr 有缓存：按分支取的文件，CDN 最多缓存 12 小时，响应头里的 `max-age` 是 7 天。刚推送的改动可能要过一阵才看得到。更新频繁的模块如果急着拿新版，先关掉本模块再更新。
+jsDelivr 会缓存文件，按分支取的内容可能落后于 GitHub 上的最新提交。具体缓存时间以 CDN 响应为准。更新频繁的模块如果急着拿新版，先关掉本模块再更新。
 
-另外 jsDelivr 偶尔会返回不完整的内容，这个模块只是降低限流的概率，不保证每次都成功。
+模块只返回重定向，不检查 CDN 返回的文件，也不会在 CDN 请求失败时自动回退到 GitHub Raw。
 
 ## 安装
 
