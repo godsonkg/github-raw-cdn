@@ -1,0 +1,7 @@
+{
+  "name": "github-raw-cdn",
+  "private": true,
+  "scripts": {
+    "test": "node --test"
+  }
+}
