@@ -45,3 +45,7 @@ npm test
 ```
 
 测试用脚本运行时模拟对象检查嵌套文件、tags/SHA、认证与查询参数、编码 ref、畸形 URL、Surge 和 Quantumult X 返回对象。没有运行真实 Surge / Quantumult X 或请求 GitHub/CDN，因此不代表设备侧和 CDN 可用性实测。
+
+## 持续回归检查
+
+每次 push / pull request 会在 Node 22、24 上执行 `npm test`，也可手动运行 Actions。工作流只有读取权限，不部署、不使用 Secrets、不安装部署依赖。
